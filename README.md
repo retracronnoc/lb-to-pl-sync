@@ -2,8 +2,10 @@
 
 A Chrome extension that copies account balances from Liquid Budget into ProjectionLab's Current Finances.
 
+> **Unofficial.** This is an independent project. It is not affiliated with, endorsed by, or supported by Liquid Budget or ProjectionLab. Please report issues here on GitHub rather than to either company.
+
 ## Install (unpacked)
-1. Download and unzip this folder somewhere that can persist (not your Desktop).
+1. Unzip this folder.
 2. Go to `chrome://extensions`, turn on **Developer mode** (top right).
 3. Click **Load unpacked** and select the `lb-pl-sync` folder.
 4. Pin the extension, click it, then click **Setup & matching**.
@@ -18,7 +20,7 @@ After setup, the toolbar popup's **Sync now** button does everything in one clic
 
 ## How balances are calculated
 - Liquid Budget's API has no balance field, so each balance is the sum of that account's transactions **dated today or earlier** (one request per sync for the whole budget). Future-dated and scheduled transactions are ignored until their date arrives. "Today" is your computer's local date. Pending transactions are included by default. You can turn that off in setup.
-- Amounts come from the API at scale 4 (123400 = $12.34) and are rounded to the **nearest whole dollar** before going to ProjectionLab.
+- Amounts come from the API at scale 4 (123400 = $12.34) and are rounded to the **nearest whole dollar** before going to ProjectionLab, since ProjectionLab doesn't use cents ($12.50 → $13).
 - Liquid Budget liabilities (credit cards, off-budget liabilities) are negative. When the target is a ProjectionLab **debt**, the sign is flipped so ProjectionLab gets the positive amount owed.
 - **Financed assets** (e.g. a house with a mortgage) appear twice in the dropdown: *Primary Home* under **Assets (value)**, which updates its `amount`, and *Primary Home (loan)* under **Asset loans (amount owed)**, which updates its `balance`. Match your Liquid Budget home-value account to the first and your mortgage account to the second. The mortgage is sent as a positive amount owed.
 - For other accounts, the field updated is whichever one each ProjectionLab account actually has: `balance` first, then `amount` (assets check `amount` first). Accounts with neither are skipped and listed in the preview. The `force` option is never used, so the extension can't create stray fields in your ProjectionLab data.

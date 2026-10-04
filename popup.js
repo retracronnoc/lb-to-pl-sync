@@ -80,29 +80,11 @@ $('syncNow').addEventListener('click', async () => {
 $('openSetup').addEventListener('click', () => chrome.runtime.openOptionsPage());
 $('openPL').addEventListener('click', () => openPL());
 
-// Web links open in a new tab.
-for (const id of ['lbLink', 'supportLink']) {
-  $(id).addEventListener('click', (e) => {
-    e.preventDefault();
-    chrome.tabs.create({ url: e.currentTarget.href });
-    window.close();
-  });
-}
-
-// mailto: links don't open reliably from extension popups (it depends on the
-// computer's mail-app setup), so clicking the address copies it instead.
-$('emailLink').addEventListener('click', async (e) => {
+// Support link opens the GitHub repo in a new tab.
+$('supportLink').addEventListener('click', (e) => {
   e.preventDefault();
-  const link = e.currentTarget;
-  const address = link.textContent;
-  try {
-    await navigator.clipboard.writeText(address);
-    link.textContent = 'Email copied!';
-  } catch {
-    link.textContent = address; // copy failed; address stays visible to copy by hand
-    return;
-  }
-  setTimeout(() => { link.textContent = address; }, 1500);
+  chrome.tabs.create({ url: e.currentTarget.href });
+  window.close();
 });
 
 render();
