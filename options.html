@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LB → PL Sync Setup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <img src="icons/icon128.png" alt="">
+      <div>
+        <h1>Liquid Budget → ProjectionLab Sync</h1>
+        <div class="muted small">Connect both apps, match accounts once, then sync balances whenever you like.</div>
+      </div>
+    </div>
+
+    <!-- Step 1: connect -->
+    <section class="card">
+      <h2><span class="step">1</span>Connect</h2>
+      <div class="grid2">
+        <div>
+          <label for="lbToken">Liquid Budget API token</label>
+          <div class="row">
+            <input id="lbToken" type="password" autocomplete="off" spellcheck="false" placeholder="lbro_…">
+            <button id="lbTest">Save &amp; test</button>
+          </div>
+          <div class="muted small" style="margin-top:6px">
+            Create one under Liquid Budget → Developer → API Tokens. A <b>read-only</b> token (<code>lbro_</code>) is all this needs.
+          </div>
+          <div id="lbStatus" class="status"></div>
+
+          <label for="budget">Budget</label>
+          <select id="budget" disabled><option>Test your token first</option></select>
+
+          <label class="check"><input id="includePending" type="checkbox"> Include pending transactions in balances</label>
+        </div>
+
+        <div>
+          <label for="plKey">ProjectionLab plugin API key</label>
+          <div class="row">
+            <input id="plKey" type="password" autocomplete="off" spellcheck="false" placeholder="Plugin API key">
+            <button id="plTest">Save &amp; test</button>
+          </div>
+          <div class="muted small" style="margin-top:6px">
+            In ProjectionLab, open Account Settings → Plugins, turn on <b>Enable plugins</b>, and copy the key.
+            Keep a signed-in ProjectionLab tab open while testing and syncing.
+            <button id="openPL" class="link">Open ProjectionLab</button>
+          </div>
+          <div id="plStatus" class="status"></div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button id="toggleKeys" class="link">Show keys</button>
+      </div>
+    </section>
+
+    <!-- Step 2: match -->
+    <section class="card">
+      <h2><span class="step">2</span>Match accounts</h2>
+      <p class="muted">Pick the ProjectionLab account each Liquid Budget account should update. Archived Liquid Budget accounts are left out. Matches save as you go.</p>
+      <div class="toolbar">
+        <div class="row">
+          <button id="loadAccounts" class="primary">Load accounts</button>
+          <button id="acceptAll" hidden>Accept all suggestions</button>
+        </div>
+        <div id="matchSummary" class="muted small"></div>
+      </div>
+      <div id="matchStatus" class="status"></div>
+      <div class="tablewrap">
+        <table id="matchTable" hidden>
+          <thead>
+            <tr><th>Liquid Budget account</th><th class="num">Balance</th><th>ProjectionLab account</th><th>Status</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Step 3: sync -->
+    <section class="card">
+      <h2><span class="step">3</span>Preview &amp; sync</h2>
+      <p class="muted">Preview what will change in ProjectionLab, then sync. Credit cards and other liabilities are sent to ProjectionLab debts as a positive amount owed.</p>
+      <div class="row">
+        <button id="previewBtn">Preview changes</button>
+        <button id="syncBtn" class="primary" disabled>Sync to ProjectionLab</button>
+      </div>
+      <div id="syncStatus" class="status"></div>
+      <div id="problems"></div>
+      <div class="tablewrap">
+        <table id="previewTable" hidden>
+          <thead>
+            <tr><th>Liquid Budget</th><th>ProjectionLab</th><th class="num">Current in PL</th><th class="num">New value</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="muted small">Your keys stay in this browser's extension storage and are only sent to liquidbudget.com and your open ProjectionLab tab.</p>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

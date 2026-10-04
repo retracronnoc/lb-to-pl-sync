@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LB → PL Sync</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="popup">
+  <div class="header">
+    <img src="icons/icon128.png" alt="">
+    <h1>Liquid Budget → ProjectionLab</h1>
+  </div>
+
+  <div id="setupNeeded" class="banner warn" hidden></div>
+
+  <div id="ready" hidden>
+    <div class="kv"><span class="muted">Budget</span><span id="budgetName">—</span></div>
+    <div class="kv"><span class="muted">Matched accounts</span><span id="matchedCount">—</span></div>
+    <div class="kv"><span class="muted">Last sync</span><span id="lastSync">—</span></div>
+    <div style="margin-top:12px"><button id="syncNow" class="primary">Sync now</button></div>
+    <div id="result" class="status"></div>
+    <ul id="details" class="list" hidden></ul>
+  </div>
+
+  <div class="row" style="justify-content:space-between;margin-top:12px">
+    <button id="openSetup" class="link">Setup &amp; matching</button>
+    <button id="openPL" class="link">Open ProjectionLab</button>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
