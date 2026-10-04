@@ -171,18 +171,18 @@ function plSelect(lb) {
   sel.append(el('option', { value: '__skip', textContent: "Don't sync this account", selected: current === '__skip' }));
 
   const usedElsewhere = new Set(Object.entries(state.matches).filter(([k, v]) => k !== lb.id && v !== '__skip').map(([, v]) => v));
-  for (const kind of ['savings', 'investment', 'asset', 'debt']) {
+  for (const kind of ['savings', 'investment', 'asset', 'assetLoan', 'debt']) {
     const group = state.plAccounts.filter((p) => p.kind === kind);
     if (!group.length) continue;
     const og = el('optgroup', { label: KIND_LABELS[kind] });
     for (const p of group) {
-      const taken = usedElsewhere.has(p.id);
-      og.append(el('option', { value: p.id, textContent: p.name + (taken ? ' (already matched)' : ''), selected: current === p.id }));
+      const taken = usedElsewhere.has(p.tid);
+      og.append(el('option', { value: p.tid, textContent: p.name + (taken ? ' (already matched)' : ''), selected: current === p.tid }));
     }
     sel.append(og);
   }
   // A saved match that no longer exists in ProjectionLab.
-  if (current && current !== '__skip' && !state.plAccounts.some((p) => p.id === current)) {
+  if (current && current !== '__skip' && !state.plAccounts.some((p) => p.tid === current)) {
     sel.value = '';
   }
   return sel;
@@ -191,7 +191,7 @@ function plSelect(lb) {
 function renderMatches() {
   const tbody = $('matchTable').querySelector('tbody');
   tbody.replaceChildren();
-  const plIds = new Set(state.plAccounts.map((p) => p.id));
+  const plIds = new Set(state.plAccounts.map((p) => p.tid));
   let matched = 0, skipped = 0, open = 0;
 
   if (!state.lbAccounts.length) {
@@ -211,7 +211,7 @@ function renderMatches() {
 
     const selectCell = el('td', {}, plSelect(lb));
     if (sug && (!m || missing)) {
-      const p = state.plAccounts.find((x) => x.id === sug.plId);
+      const p = state.plAccounts.find((x) => x.tid === sug.plId);
       selectCell.append(el('div', { class: 'suggest' },
         'Suggested: ', el('b', { textContent: p.name }), ' ',
         el('button', { class: 'link', textContent: 'Accept', onclick: () => acceptSuggestion(lb.id, sug.plId) })));

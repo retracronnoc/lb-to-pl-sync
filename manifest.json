@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Liquid Budget → ProjectionLab Sync",
   "short_name": "LB → PL Sync",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Sync account balances from Liquid Budget into ProjectionLab Current Finances.",
   "permissions": ["storage", "unlimitedStorage", "scripting"],
   "host_permissions": [

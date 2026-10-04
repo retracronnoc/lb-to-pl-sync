@@ -20,7 +20,8 @@ After setup, the toolbar popup's **Sync now** button does everything in one clic
 - Liquid Budget's API has no balance field, so each balance is the sum of that account's transactions **dated today or earlier** (one request per sync for the whole budget). Future-dated and scheduled transactions are ignored until their date arrives. "Today" is your computer's local date. Pending transactions are included by default. You can turn that off in setup.
 - Amounts come from the API at scale 4 (123400 = $12.34) and are rounded to the **nearest whole dollar** before going to ProjectionLab, since ProjectionLab doesn't use cents ($12.50 → $13).
 - Liquid Budget liabilities (credit cards, off-budget liabilities) are negative. When the target is a ProjectionLab **debt**, the sign is flipped so ProjectionLab gets the positive amount owed.
-- Savings, investment and debt accounts update `balance`. ProjectionLab assets update `amount`.
+- **Financed assets** (e.g. a house with a mortgage) appear twice in the dropdown: *Primary Home* under **Assets (value)**, which updates its `amount`, and *Primary Home (loan)* under **Asset loans (amount owed)**, which updates its `balance`. Match your Liquid Budget home-value account to the first and your mortgage account to the second. The mortgage is sent as a positive amount owed.
+- For other accounts, the field updated is whichever one each ProjectionLab account actually has: `balance` first, then `amount` (assets check `amount` first). Accounts with neither are skipped and listed in the preview. The `force` option is never used, so the extension can't create stray fields in your ProjectionLab data.
 
 ## Rate limits
 Liquid Budget allows 100 requests/hour per token. The extension sends ETags, so unchanged data comes back as a 304, which doesn't count toward the limit. A sync usually uses about 3 requests.
