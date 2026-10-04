@@ -80,4 +80,13 @@ $('syncNow').addEventListener('click', async () => {
 $('openSetup').addEventListener('click', () => chrome.runtime.openOptionsPage());
 $('openPL').addEventListener('click', () => openPL());
 
+// Open footer links in a tab (popup links, especially mailto:, don't open reliably on their own).
+for (const id of ['supportLink', 'contactLink']) {
+  $(id).addEventListener('click', (e) => {
+    e.preventDefault();
+    chrome.tabs.create({ url: e.currentTarget.href });
+    window.close();
+  });
+}
+
 render();

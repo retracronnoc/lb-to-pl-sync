@@ -123,3 +123,7 @@ td select { min-width: 200px; }
 .popup button.primary { width: 100%; padding: 10px; }
 .kv { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
 .list { margin: 6px 0 0; padding-left: 18px; font-size: 12px; }
+
+.popup .footer { display: flex; justify-content: center; gap: 8px; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; }
+.popup .footer a { text-decoration: none; }
+.popup .footer a:hover { text-decoration: underline; }
