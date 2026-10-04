@@ -3,7 +3,7 @@
 A Chrome extension that copies account balances from Liquid Budget into ProjectionLab's Current Finances.
 
 ## Install (unpacked)
-1. Unzip this folder.
+1. Download and unzip this folder somewhere that can persist (not your Desktop).
 2. Go to `chrome://extensions`, turn on **Developer mode** (top right).
 3. Click **Load unpacked** and select the `lb-pl-sync` folder.
 4. Pin the extension, click it, then click **Setup & matching**.
