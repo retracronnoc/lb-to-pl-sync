@@ -4,6 +4,9 @@ A Chrome extension that copies account balances from Liquid Budget into Projecti
 
 > **Unofficial.** This is an independent project. It is not affiliated with, endorsed by, or supported by Liquid Budget or ProjectionLab. Please report issues here on GitHub rather than to either company.
 
+Now available in Chrome Web Store -> https://chromewebstore.google.com/detail/liquid-budget-%E2%86%92-projectio/jmahmanbhimmoonedhjkhgglpgopfcbo
+
+
 ## Install (unpacked)
 1. Unzip this folder.
 2. Go to `chrome://extensions`, turn on **Developer mode** (top right).
